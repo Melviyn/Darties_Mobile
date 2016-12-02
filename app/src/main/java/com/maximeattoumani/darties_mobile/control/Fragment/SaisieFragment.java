@@ -29,6 +29,7 @@ public class SaisieFragment extends Fragment{
 
         View rootView = inflater.inflate(R.layout.saisie_layout,container,false);
 
+
         RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
         EditText saisie=(EditText) rootView.findViewById(R.id.Valeurs);
         TextView objectif = (TextView) rootView.findViewById((R.id.moisVentesObjVal)) ;
