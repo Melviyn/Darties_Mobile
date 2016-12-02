@@ -7,6 +7,7 @@ package com.maximeattoumani.darties_mobile.model;
 public class FamProd {
     private String ID_FAMILLE_PRODUIT;
     private String LIB_FAMILLE_PRODUIT;
+    private String DATEMAJ_FAMPROD;
 
     public String getDATEMAJ_FAMPROD() {
         return DATEMAJ_FAMPROD;
@@ -32,5 +33,5 @@ public class FamProd {
         this.ID_FAMILLE_PRODUIT = ID_FAMILLE_PRODUIT;
     }
 
-    private String DATEMAJ_FAMPROD;
+
 }

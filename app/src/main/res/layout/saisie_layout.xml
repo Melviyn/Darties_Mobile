@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:text="Mois actuelle"
@@ -21,6 +22,13 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:id="@+id/moisVentes" />
+
+        <ProgressBar
+            style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,15 +82,52 @@
 
         </LinearLayout>
 
-        <TextView
-            android:text="Saisie des nouvelles valeurs"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:inputType="numberSigned"
+            android:ems="10"
+            android:id="@+id/Valeurs"
+            android:layout_marginTop="50dp"
+            android:hint="Saisie des Ventes"
+            style="@style/Widget.AppCompat.EditText"
+            android:fontFamily="sans-serif"
+            android:textSize="24sp"
             android:textAlignment="center"
-            android:textStyle="bold"
-            android:layout_marginTop="150dp"
-            android:id="@+id/saisieNewValeurs" />
+            android:hapticFeedbackEnabled="true" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:layout_weight="0.06"
+            android:layout_marginLeft="50dp"
+            android:checkedButton="@+id/positif"
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:text="Positif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/positif"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:text="negatif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/negatif"
+                android:layout_weight="1" />
+        </RadioGroup>
+
+        <Button
+            android:text="Valider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonValide"
+            android:layout_marginTop="200dp"
+            android:elevation="12dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:visibility="invisible" />
 
 
     </LinearLayout>
