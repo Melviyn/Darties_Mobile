@@ -89,11 +89,10 @@ public class TableauxFragment extends Fragment {
             @Override
             public void success(List<ProduitAccueil> prod, Response response) {
                 if (response.getStatus() == 200) {
-                    System.out.println("test"+prod.get(0).getLib_famille_produit());
                     ca = new ArrayList<RowAccueil>();
                     ventes = new ArrayList<RowAccueil>();
                     marge = new ArrayList<RowAccueil>();
-                    System.out.println(prod.size());
+
                     for(int i = 0; i < prod.size();i++){
                         String ca_obj = prod.get(i).getCA_Objectif();
                         String ca_reel = prod.get(i).getCA_Reel();
@@ -101,10 +100,10 @@ public class TableauxFragment extends Fragment {
                         String vente_reel = prod.get(i).getVentes_Reel();
                         String marge_obj = prod.get(i).getMarge_Objectif();
                         String marg_reel = prod.get(i).getMarge_Reel();
+
                         ca.add(new RowAccueil(prod.get(i).getLib_famille_produit(),ca_obj.substring(0,ca_obj.lastIndexOf('.')-1),ca_reel.substring(0,ca_reel.lastIndexOf('.'))));
                         ventes.add(new RowAccueil(prod.get(i).getLib_famille_produit(),vente_obj.substring(00,vente_obj.lastIndexOf('.')),vente_reel.substring(0,vente_reel.lastIndexOf('.'))));
                         marge.add(new RowAccueil(prod.get(i).getLib_famille_produit(),marge_obj.substring(0,marge_obj.lastIndexOf('.')),marg_reel.substring(0,marg_reel.lastIndexOf('.'))));
-
                     }
                     CA_fragment ca_frag = new CA_fragment();
                     Vente_fragment vente_frag = new Vente_fragment();
@@ -116,7 +115,7 @@ public class TableauxFragment extends Fragment {
                     fragmentList.add(vente_frag);
                     fragmentList.add(marge_frag);
 
-                    MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(myContext.getSupportFragmentManager(),fragmentList);
+                    MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(),fragmentList);
                     viewPager.setAdapter(myFragmentPagerAdapter);
                 }
             }

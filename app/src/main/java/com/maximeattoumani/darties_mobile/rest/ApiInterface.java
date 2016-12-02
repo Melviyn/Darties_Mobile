@@ -1,6 +1,8 @@
 package com.maximeattoumani.darties_mobile.rest;
 
+import com.maximeattoumani.darties_mobile.model.FamProd;
 import com.maximeattoumani.darties_mobile.model.ProduitAccueil;
+import com.maximeattoumani.darties_mobile.model.Profil;
 import com.maximeattoumani.darties_mobile.model.User;
 
 import java.util.List;
@@ -33,4 +35,10 @@ public static final String ENDPOINT = "http://darties1equipea.ddns.net/Darties_E
                           @Path("enseigne")String enseigne,
                           Callback<List<ProduitAccueil>> classback);
 
+    @GET("/apiCall.php/getProfil/{token}")
+    void listProfilAsync(@Path("token")String token,
+                      Callback<List<Profil>> callback);
+
+    void listFamProduitAsync(@Path("token")String token,
+                             Callback<List<FamProd>> callback);
 }
