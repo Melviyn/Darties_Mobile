@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_pressed="true" >
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <stroke
+                android:width="5dp"
+                android:color="#e7f50e0e"/>
+            <corners
+                android:topLeftRadius="10dp"
+                android:topRightRadius="10dp"
+                android:bottomRightRadius="10dp"
+                android:bottomLeftRadius="10dp"
+                />
+
+            <padding
+                android:left="5dp"
+                android:right="5dp"
+                android:top="1dp"
+                android:bottom="10dp"/>
+            <solid android:color="#f7fbf9f9"/>
+        </shape>
+    </item>
+
+    <item android:state_focused="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <stroke
+                android:width="5dp"
+                android:color="#ffe4c4"/>
+            <corners
+                android:topLeftRadius="10dp"
+                android:topRightRadius="10dp"
+                android:bottomRightRadius="10dp"
+                android:bottomLeftRadius="10dp"
+                />
+
+            <padding
+                android:left="10dp"
+                android:right="10dp"
+                android:top="1dp"
+                android:bottom="10dp"/>
+            <solid android:color="#ffe4c4"/>
+        </shape>
+    </item>
+
+    <item >
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <stroke
+                android:width="5dp"
+                android:color="#ffe4c4"/>
+            <corners
+                android:topLeftRadius="10dp"
+                android:topRightRadius="10dp"
+                android:bottomRightRadius="10dp"
+                android:bottomLeftRadius="10dp"
+                />
+
+            <padding
+                android:left="10dp"
+                android:right="10dp"
+                android:top="1dp"
+                android:bottom="10dp"/>
+            <solid android:color="#ffe4c4"/>
+        </shape>
+    </item>
+
+</selector>

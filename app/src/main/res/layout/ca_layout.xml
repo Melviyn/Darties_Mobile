@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="CA"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/option_shape"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:id="@+id/ca" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:text="Libellé"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/libelleVente"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:background="@color/Tableau"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Objectif"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/objectifVente"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:background="@color/Tableau"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Reel"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/reelVente"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:background="@color/Tableau"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listCa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
