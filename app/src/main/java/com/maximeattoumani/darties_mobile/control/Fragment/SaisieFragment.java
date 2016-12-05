@@ -23,6 +23,9 @@ import com.maximeattoumani.darties_mobile.rest.ApiClient;
 import com.maximeattoumani.darties_mobile.rest.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,6 +45,8 @@ public class SaisieFragment extends Fragment{
     private int nbProd;
     private static int prodAcu=0;
     TextView prodName;
+    private  String[] nomMois = { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
+            "Août", "Septembre", "Octobre", "Novembre", "Décembre" };
 
 
 
@@ -56,6 +61,7 @@ public class SaisieFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.saisie_layout,container,false);
         prods = new ArrayList<FamProd>();
         prodName= (TextView) rootView.findViewById((R.id.prodName));
+        TextView moisVentes = (TextView) rootView.findViewById(R.id.moisVentes);
         RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
         //EditText saisie=(EditText) rootView.findViewById(R.id.Valeurs);
         TextView objectif = (TextView) rootView.findViewById((R.id.moisVentesObjVal)) ;
@@ -64,12 +70,20 @@ public class SaisieFragment extends Fragment{
         ventes.setText("500");
         ProgressBar progBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         //Button bValider= (Button) rootView.findViewById(R.id.buttonValide) ;
+
+        Calendar cal = Calendar.getInstance();
+        moisVentes.setText( nomMois[cal.get(Calendar.MONTH)]);
+
         //Session
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
         HashMap<String,String> user = session.getAPI();
         api = user.get(SessionManager.KEY_API);
         // END SESSION
+
+
+
+
 
         apiService = ApiClient.getClient();
         apiService.listFamProduitAsync(api, new Callback<List<FamProd>>() {
