@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.maximeattoumani.darties_mobile.R;
+import com.maximeattoumani.darties_mobile.control.Activity.FiltreActivity;
 import com.maximeattoumani.darties_mobile.control.Activity.LoginActivity;
 import com.maximeattoumani.darties_mobile.control.Activity.MainActivity;
 import com.maximeattoumani.darties_mobile.control.Adapter.MyFragmentPagerAdapter;
@@ -34,6 +36,8 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by melvi on 24/11/2016.
@@ -60,7 +64,8 @@ public class TableauxFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab_layout,container,false);
+        View rootView = null;
+        rootView = inflater.inflate(R.layout.tab_layout,container,false);
 
          //Session
         session = new SessionManager(getActivity().getApplicationContext());
@@ -76,7 +81,7 @@ public class TableauxFragment extends Fragment {
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
-        fragmentList = new ArrayList<Fragment>();
+
 
         apiService = ApiClient.getClient();
 
@@ -89,6 +94,8 @@ public class TableauxFragment extends Fragment {
             @Override
             public void success(List<ProduitAccueil> prod, Response response) {
                 if (response.getStatus() == 200) {
+                    fragmentList = null;
+                    fragmentList = new ArrayList<Fragment>();
                     ca = new ArrayList<RowAccueil>();
                     ventes = new ArrayList<RowAccueil>();
                     marge = new ArrayList<RowAccueil>();
@@ -115,7 +122,7 @@ public class TableauxFragment extends Fragment {
                     fragmentList.add(vente_frag);
                     fragmentList.add(marge_frag);
 
-                    MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(),fragmentList);
+                    MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(),fragmentList);
                     viewPager.setAdapter(myFragmentPagerAdapter);
                 }
             }
@@ -151,16 +158,39 @@ public class TableauxFragment extends Fragment {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent i = new Intent(getActivity().getApplicationContext(), FiltreActivity.class);
+                startActivity(i);
             }
         });
 
         return rootView;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == 10){
+            System.out.println("test");
+        }
+
+    }
+    @Override
+    public void onResume() {
+
+
+        super.onResume();
+
+    }
 
     @Override
-    public void onAttach(Activity activity){
-        myContext=(FragmentActivity) activity;
-        super.onAttach(activity);
+    public void onPause() {
+
+        fragmentList = null;
+        ca = null;
+        ventes = null;
+        marge = null;
+
+        super.onPause();
     }
+
 }
