@@ -52,11 +52,6 @@ public class MainActivity extends AppCompatActivity
     CmpFragment comptefrg;
     private   HashMap<String,String> user;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
