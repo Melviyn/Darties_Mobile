@@ -136,7 +136,7 @@ public class TableauxFragment extends Fragment {
 
         });
                 try {
-                    Thread.sleep(6500);
+                    Thread.sleep(3500);
                 } catch (Exception e) {
                 }
                 ringProgressDialog.dismiss();

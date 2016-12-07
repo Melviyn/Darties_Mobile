@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     private ImageView image;
 
-    private TextView id;
-    private TextView nom;
-    private TextView prenom;
-    private Button logout;
     private ApiInterface apiService;
     private SessionManager session;
     private String api;
