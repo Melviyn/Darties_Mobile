@@ -4,6 +4,7 @@ package com.maximeattoumani.darties_mobile.control.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity
     private SessionManager session;
     private String api;
     CmpFragment comptefrg;
+    private   HashMap<String,String> user;
+
+
 
 
 
@@ -63,6 +68,7 @@ public class MainActivity extends AppCompatActivity
 
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
+
         this.infoCompte();
         TableauxFragment fragment = new TableauxFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
@@ -113,10 +119,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.modif) {
 
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -141,9 +148,31 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Tableau", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.deconnect) {
-            //session = new SessionManager(getApplicationContext());
-            session.logoutUser();
+
+            AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
+            builder.setIcon(R.mipmap.deco);
+            builder.setTitle("Déconnexion");
+            builder.setInverseBackgroundForced(true);
+            builder.setMessage("Voulez-vous vraiment quitter l'application ?");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                    session.logoutUser();
+                }
+            });
+            builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alert=builder.create();
+            alert.show();
         }
+            //session = new SessionManager(getApplicationContext());
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,22 +181,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void infoCompte(){
-        HashMap<String,String> user = session.getAPI();
+        user = session.getAPI();
         api = user.get(SessionManager.KEY_API);
         apiService = ApiClient.getClient();
 
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(MainActivity.this, "Veuillez patienter", "récupération de données ...", true);
-        ringProgressDialog.setCancelable(true);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
         apiService.listUserAsync(api, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
                 if (response.getStatus() == 200) {
                     if(users!= null){
                         User user = users.get(0);
-                        System.out.println(user);
                         if(api.equals(user.getApi_key())) {
                             comptefrg = new CmpFragment();
                             comptefrg.userCourant(user);
@@ -182,13 +205,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-            try {
-                Thread.sleep(2000);
-            } catch (Exception e) {
-            }
-            ringProgressDialog.dismiss();
-        }
-    }).start();
     }
 
     public void onClick(View v) {
