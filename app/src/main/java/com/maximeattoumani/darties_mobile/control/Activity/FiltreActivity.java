@@ -49,6 +49,7 @@ public class FiltreActivity extends Activity {
 
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +138,7 @@ public class FiltreActivity extends Activity {
                     for(int i=0;i <ens.size();i++){
                         System.out.println(ens.get(i).getLib_enseigne());
                         listSpinEns.add(ens.get(i).getLib_enseigne());
+
                     }
                 }
             }

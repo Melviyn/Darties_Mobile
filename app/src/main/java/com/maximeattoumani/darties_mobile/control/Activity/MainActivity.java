@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity
     private String api;
     CmpFragment comptefrg;
     private   HashMap<String,String> user;
+    private TextView name;
+    private TextView mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.dm_layout);
 
         session = new SessionManager(getApplicationContext());
-        session.checkLogin();
+        //session.checkLogin();
+
+
 
         this.infoCompte();
         TableauxFragment fragment = new TableauxFragment();
@@ -79,6 +83,9 @@ public class MainActivity extends AppCompatActivity
 
         image = (ImageView) headerview.findViewById(R.id.imageView) ;
         image.setOnClickListener(this);
+
+        name = (TextView) headerview.findViewById(R.id.nomprenom);
+        mail = (TextView) headerview.findViewById(R.id.mail);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -185,6 +192,8 @@ public class MainActivity extends AppCompatActivity
                         if(api.equals(user.getApi_key())) {
                             comptefrg = new CmpFragment();
                             comptefrg.userCourant(user);
+                            name.setText(user.getPrenom()+" "+user.getNom());
+                            mail.setText(user.getMail());
                         }
                     }
 
