@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="INFORMATION COMPTE"
-        android:id="@+id/textView"
+        android:id="@+id/libelle"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="42dp"
         android:layout_alignParentTop="true"
@@ -41,7 +41,7 @@
         android:id="@+id/id"
         android:layout_marginTop="37dp"
         android:textSize="16sp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/libelle"
         android:layout_alignStart="@+id/nom" />
 
     <TextView

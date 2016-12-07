@@ -60,10 +60,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.dm_layout);
 
         session = new SessionManager(getApplicationContext());
-        //session.checkLogin();
-
-
-
+        System.out.println(session.isLoggedIn());
         this.infoCompte();
         TableauxFragment fragment = new TableauxFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
@@ -158,6 +155,7 @@ public class MainActivity extends AppCompatActivity
                 public void onClick(DialogInterface dialog, int which) {
 
                     session.logoutUser();
+
                 }
             });
             builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
