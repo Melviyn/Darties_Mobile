@@ -19,7 +19,7 @@ public class SessionManager {
     private int PRIVATE_MODE = 0;
     private static final String PREF_NAME = "AndroidHivePref";
     private static final String IS_LOGIN = "IsLoggedIn";
-    public static final String KEY_API = "apikey";
+    private static final String KEY_API = "apikey";
 
 
     public SessionManager(Context context){
@@ -41,6 +41,11 @@ public class SessionManager {
         return user;
     }
 
+    public void addValueString(String key, String value){
+        editor.putString(key,value);
+        editor.commit();
+    }
+
     /*Vérifie si la variable de session est toujours à true
     sinon on redirige l'utilisateur sur l'interface connexion*/
     public void checkLogin(){
@@ -56,6 +61,14 @@ public class SessionManager {
             _context.startActivity(i);
         }
 
+    }
+
+    public String getKeyApi(){
+        return pref.getString(KEY_API,null);
+    }
+
+    public String getStringValue(String key){
+        return pref.getString(key,null);
     }
     //Supprime tous les variable de session et redirige l'utilisateur sur l'interface connexion
     public void logoutUser(){

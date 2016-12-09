@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.maximeattoumani.darties_mobile.R;
+import com.maximeattoumani.darties_mobile.model.Profil;
 import com.maximeattoumani.darties_mobile.model.SessionManager;
 import com.maximeattoumani.darties_mobile.model.User;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button connexion;
     private SessionManager session;
+    private String api;
+    private ApiInterface apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(!mail.equals("") && !password.equals("")){
 
-                        ApiInterface apiService = ApiClient.getClient();
+                        apiService = ApiClient.getClient();
                         session = new SessionManager(getApplicationContext());
                         apiService.listApiAsync(mail, pwd, new Callback<List<User>>() {
                             @Override
@@ -57,6 +60,28 @@ public class LoginActivity extends AppCompatActivity {
                                     if (users != null) {
                                         User user = users.get(0);
                                         session.createLoginSession(user.getApi_key());
+                                        api = session.getKeyApi();
+                                        apiService.listProfilAsync(api, new Callback<List<Profil>>() {
+
+                                            @Override
+                                            public void success(List<Profil> prof, Response response) {
+                                                if (response.getStatus() == 200) {
+                                                    if (prof != null) {
+                                                        Profil profil = prof.get(0);
+                                                        session.addValueString("LIB_PROFIL",profil.getLib_profil());
+                                                        session.addValueString("id_zone",profil.getId_zone());
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void failure(RetrofitError error) {
+
+                                                Log.d("Error", error.getMessage());
+                                            }
+
+                                        });
+
                                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(i);
                                         finish();
@@ -72,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                         });
+
 
 
                     }
@@ -90,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-}
 
+
+}
 

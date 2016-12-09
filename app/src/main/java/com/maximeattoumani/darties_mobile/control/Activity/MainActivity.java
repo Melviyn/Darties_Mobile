@@ -41,7 +41,7 @@ import retrofit.client.Response;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
-    private Button compte;
+
     NavigationView navigationView;
     Toolbar toolbar;
     private ImageView image;
@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity
     private SessionManager session;
     private String api;
     CmpFragment comptefrg;
-    private   HashMap<String,String> user;
+
+    private User userInfo;
 
 
 
@@ -95,7 +96,8 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else {
             super.onBackPressed();
         }
     }
@@ -114,11 +116,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.modif) {
-
-            return true;
-        }
 
 
         return super.onOptionsItemSelected(item);
@@ -177,8 +174,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void infoCompte(){
-        user = session.getAPI();
-        api = user.get(SessionManager.KEY_API);
+        api = session.getKeyApi();
+        System.out.println(api);
         apiService = ApiClient.getClient();
 
         apiService.listUserAsync(api, new Callback<List<User>>() {
@@ -186,10 +183,10 @@ public class MainActivity extends AppCompatActivity
             public void success(List<User> users, Response response) {
                 if (response.getStatus() == 200) {
                     if(users!= null){
-                        User user = users.get(0);
-                        if(api.equals(user.getApi_key())) {
+                         userInfo = users.get(0);
+                        if(api.equals(userInfo.getApi_key())) {
                             comptefrg = new CmpFragment();
-                            comptefrg.userCourant(user);
+                            comptefrg.userCourant(userInfo);
                         }
                     }
 

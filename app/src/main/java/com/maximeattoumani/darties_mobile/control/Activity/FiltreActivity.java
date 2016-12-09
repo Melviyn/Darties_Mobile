@@ -23,6 +23,7 @@ import com.maximeattoumani.darties_mobile.rest.ApiInterface;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -41,11 +42,12 @@ public class FiltreActivity extends Activity {
     private String api;
     private SessionManager session;
     private ApiInterface apiService;
-    private List<Geographie> listGeo;
-    private List<Enseigne> listEns;
+    private HashMap<String,String> codeGeo;
+    private HashMap<String,String> codeEns;
     private Spinner spinner1;
     private Spinner spinner2;
     private Spinner spinner3;
+    private Intent resultIntent;
 
 
 
@@ -63,10 +65,21 @@ public class FiltreActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 géo = parent.getItemAtPosition(position).toString();
+                for (Map.Entry<String, String> entry : codeGeo.entrySet()) {
+                    if (entry.getValue().equals(géo)) {
+                        //resultIntent.putExtra("géo",entry.getKey());
+                    }
+                }
+
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
                 géo = arg0.getItemAtPosition(0).toString();
+                for (Map.Entry<String, String> entry : codeGeo.entrySet()) {
+                    if (entry.getValue().equals(géo)) {
+                        resultIntent.putExtra("géo",entry.getKey());
+                    }
+                }
             }
         });
 
@@ -74,10 +87,20 @@ public class FiltreActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 enseigne = parent.getItemAtPosition(position).toString();
+                for (Map.Entry<String, String> entry : codeEns.entrySet()) {
+                    if (entry.getValue().equals(enseigne)) {
+                        resultIntent.putExtra("ens",entry.getKey());
+                    }
+                }
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
                 enseigne = arg0.getItemAtPosition(0).toString();
+                for (Map.Entry<String, String> entry : codeEns.entrySet()) {
+                    if (entry.getValue().equals(enseigne)) {
+                        resultIntent.putExtra("ens",entry.getKey());
+                    }
+                }
             }
         });
 
@@ -98,8 +121,7 @@ public class FiltreActivity extends Activity {
 
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
-        HashMap<String,String> user = session.getAPI();
-        api = user.get(SessionManager.KEY_API);
+        api = session.getKeyApi();
         apiService = ApiClient.getClient();
 
         final ProgressDialog ringProgressDialog = ProgressDialog.show(this, "Veuillez patienter", "récupération de données ...", true);
@@ -111,10 +133,19 @@ public class FiltreActivity extends Activity {
             @Override
             public void success(List<Geographie> geo, Response response) {
                 if (response.getStatus() == 200) {
-                    listGeo = geo;
+                    String lib = session.getStringValue("LIB_PROFIL");
+                    String ville = lib.substring(lib.indexOf(" ")+1,lib.length());
+
+                    codeGeo = new HashMap<String, String>();
                     for(int i=0;i <geo.size();i++){
-                        System.out.println(geo.get(i).getLIBELLE());
-                        listSpinGeo.add(geo.get(i).getLIBELLE());
+                        if(ville.equals(geo.get(i).getLIBELLE())){
+                            if(!listSpinGeo.contains(ville)){
+                                listSpinGeo.add(geo.get(i).getLIBELLE());
+                                codeGeo.put(geo.get(i).getCODE().toString(),geo.get(i).getLIBELLE());
+                            }
+
+                        }
+
                     }
                 }
             }
@@ -132,10 +163,10 @@ public class FiltreActivity extends Activity {
             @Override
             public void success(List<Enseigne> ens, Response response) {
                 if (response.getStatus() == 200) {
-                    listEns = ens;
-                    System.out.println(ens.size());
+
+                    codeEns = new HashMap<String, String>();
                     for(int i=0;i <ens.size();i++){
-                        System.out.println(ens.get(i).getLib_enseigne());
+                        codeEns.put(ens.get(i).getCode(),ens.get(i).getLib_enseigne());
                         listSpinEns.add(ens.get(i).getLib_enseigne());
                     }
                 }
@@ -156,14 +187,6 @@ public class FiltreActivity extends Activity {
                 ringProgressDialog.dismiss();
             }
         }).start();
-    // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
 
         ArrayAdapter<String> dataAdapterGeo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listSpinGeo);
         dataAdapterGeo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -172,9 +195,9 @@ public class FiltreActivity extends Activity {
         ArrayAdapter<String> dataAdapterEns = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listSpinEns);
         dataAdapterEns.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(dataAdapterEns);
-        /*Intent resultIntent = new Intent();
-        resultIntent.putExtra("myResult", "test");
-        setResult(Activity.RESULT_OK, resultIntent);
-        finish();*/
+        //resultIntent = new Intent();
+
+        //setResult(Activity.RESULT_OK, resultIntent);
+        //finish();
     }
 }
