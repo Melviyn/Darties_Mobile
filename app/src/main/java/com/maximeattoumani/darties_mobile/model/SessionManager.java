@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.maximeattoumani.darties_mobile.control.Activity.LoginActivity;
+import com.maximeattoumani.darties_mobile.control.Activity.MainActivity;
 
 import java.util.HashMap;
 
@@ -61,6 +62,17 @@ public class SessionManager {
             _context.startActivity(i);
         }
 
+        else {
+            // user is not logged in redirect him to Login Activity
+            Intent i = new Intent(_context, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            // Staring Login Activity
+            _context.startActivity(i);
+        }
+
     }
 
     public String getKeyApi(){
@@ -82,5 +94,7 @@ public class SessionManager {
 
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
+
     }
+
 }

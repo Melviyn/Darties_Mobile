@@ -11,7 +11,15 @@ public class User {
     private String password;
     private String mail;
     private String apikey;
+    private String lib_profil;
 
+    public String getLib_profil() {
+        return lib_profil;
+    }
+
+    public void setLib_profil(String lib_profil) {
+        this.lib_profil = lib_profil;
+    }
 
     public int getId_profil() {
         return id_profil;
