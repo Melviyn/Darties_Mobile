@@ -1,11 +1,10 @@
 package com.maximeattoumani.darties_mobile.control.Activity;
 
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,12 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maximeattoumani.darties_mobile.R;
+import com.maximeattoumani.darties_mobile.control.Fragment.AccueilFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.CmpFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.SaisieFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.TableauxFragment;
@@ -31,9 +30,6 @@ import com.maximeattoumani.darties_mobile.model.User;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
 import com.maximeattoumani.darties_mobile.rest.ApiInterface;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit.Callback;
@@ -56,11 +52,6 @@ public class MainActivity extends AppCompatActivity
     private User userInfo;
     private TextView name;
     private TextView mail;
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +87,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        /*if(api.equals(session.getKeyApi())) {
-            comptefrg = new CmpFragment();
-            comptefrg.userCourant(userInfo);
-            name.setText(userInfo.getPrenom()+" "+userInfo.getNom());
-            mail.setText(userInfo.getMail());
-        }*/
     }
 
     @Override
@@ -177,6 +162,22 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alert=builder.create();
             alert.show();
         }
+
+        else if(id == R.id.acc){
+
+            AccueilFragment fragment = new AccueilFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_main,fragment);
+            fragmentTransaction.commit();
+        }
+
+        else if(id == R.id.monComp){
+
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_main, comptefrg);
+            fragmentTransaction.commit();
+        }
+
         //session = new SessionManager(getApplicationContext());
 
 
