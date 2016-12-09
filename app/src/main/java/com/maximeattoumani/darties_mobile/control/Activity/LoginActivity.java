@@ -1,7 +1,9 @@
 package com.maximeattoumani.darties_mobile.control.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -50,9 +52,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(mail.trim().length() > 0 && pwd.trim().length() > 0) {
 
                     if(!mail.equals("") && !password.equals("")){
-
-                        apiService = ApiClient.getClient();
                         session = new SessionManager(getApplicationContext());
+                        apiService = ApiClient.getClient();
+                        System.out.println(session.isLoggedIn());
                         apiService.listApiAsync(mail, pwd, new Callback<List<User>>() {
                             @Override
                             public void success(List<User> users, Response response) {
@@ -115,6 +117,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 
 

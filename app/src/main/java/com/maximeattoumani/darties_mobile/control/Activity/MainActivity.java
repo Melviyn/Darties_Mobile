@@ -91,13 +91,35 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
         else {
             super.onBackPressed();
-        }
+        }*/
+
+        AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
+        builder.setIcon(R.mipmap.deco);
+        builder.setTitle("Déconnexion");
+        builder.setInverseBackgroundForced(true);
+        builder.setMessage("Voulez-vous vraiment quitter l'application ?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                session.logoutUser();
+            }
+        });
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert=builder.create();
+        alert.show();
     }
 
     @Override
@@ -177,10 +199,6 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.content_main, comptefrg);
             fragmentTransaction.commit();
         }
-
-        //session = new SessionManager(getApplicationContext());
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
