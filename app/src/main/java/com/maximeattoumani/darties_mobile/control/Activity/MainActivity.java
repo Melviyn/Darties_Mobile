@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.content_main,fragment);
             fragmentTransaction.commit();
             Toast.makeText(this, "Saisie", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.tab) {
+        } else if (id == R.id.tabAcc) {
             TableauxFragment fragment = new TableauxFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main,fragment);

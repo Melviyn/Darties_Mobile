@@ -89,6 +89,48 @@ public class TableauxFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
+        getTabAcc();
+                try {
+                    Thread.sleep(3500);
+                } catch (Exception e) {
+                }
+                ringProgressDialog.dismiss();
+            }
+        }).start();
+
+        // END CALL API
+        // View Pager
+
+
+
+
+
+        // END View Pager
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent i = new Intent(getActivity().getApplicationContext(), FiltreActivity.class);
+                startActivityForResult(i,10);
+            }
+        });
+
+        return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == 10){
+            System.out.println("test");
+        }
+
+    }
+
+    public void getTabAcc(){
         apiService.listAccueilAsync(api,temps,geo,enseigne, new Callback<List<ProduitAccueil>>() {
             @Override
             public void success(List<ProduitAccueil> prod, Response response) {
@@ -134,44 +176,6 @@ public class TableauxFragment extends Fragment {
             }
 
         });
-                try {
-                    Thread.sleep(3500);
-                } catch (Exception e) {
-                }
-                ringProgressDialog.dismiss();
-            }
-        }).start();
-
-        // END CALL API
-        // View Pager
-
-
-
-
-
-        // END View Pager
-
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent i = new Intent(getActivity().getApplicationContext(), FiltreActivity.class);
-                startActivity(i);
-            }
-        });
-
-        return rootView;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode == 10){
-            System.out.println("test");
-        }
-
     }
     @Override
     public void onResume() {

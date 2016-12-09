@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -199,7 +200,16 @@ public class FiltreActivity extends Activity {
         spinner2.setAdapter(dataAdapterEns);
         //resultIntent = new Intent();
 
-        //setResult(Activity.RESULT_OK, resultIntent);
-        //finish();
+        Button valider = (Button) findViewById(R.id.filtreValid);
+
+        valider.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+        });
+
     }
 }
