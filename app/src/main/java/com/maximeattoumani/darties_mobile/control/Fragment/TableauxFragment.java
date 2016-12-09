@@ -70,7 +70,6 @@ public class TableauxFragment extends Fragment {
          //Session
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
-        HashMap<String,String> user = session.getAPI();
         api = session.getKeyApi();
         // END SESSION
 

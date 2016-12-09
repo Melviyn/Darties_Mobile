@@ -31,6 +31,8 @@ import com.maximeattoumani.darties_mobile.model.User;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
 import com.maximeattoumani.darties_mobile.rest.ApiInterface;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity
     CmpFragment comptefrg;
 
     private User userInfo;
+    private TextView name;
+    private TextView mail;
 
 
 
@@ -86,9 +90,18 @@ public class MainActivity extends AppCompatActivity
         image = (ImageView) headerview.findViewById(R.id.imageView) ;
         image.setOnClickListener(this);
 
+        name = (TextView) headerview.findViewById(R.id.nomprenom);
+        mail = (TextView) headerview.findViewById(R.id.mail);
+
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        /*if(api.equals(session.getKeyApi())) {
+            comptefrg = new CmpFragment();
+            comptefrg.userCourant(userInfo);
+            name.setText(userInfo.getPrenom()+" "+userInfo.getNom());
+            mail.setText(userInfo.getMail());
+        }*/
     }
 
     @Override
@@ -164,7 +177,7 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alert=builder.create();
             alert.show();
         }
-            //session = new SessionManager(getApplicationContext());
+        //session = new SessionManager(getApplicationContext());
 
 
 
@@ -175,7 +188,6 @@ public class MainActivity extends AppCompatActivity
 
     private void infoCompte(){
         api = session.getKeyApi();
-        System.out.println(api);
         apiService = ApiClient.getClient();
 
         apiService.listUserAsync(api, new Callback<List<User>>() {
@@ -183,10 +195,12 @@ public class MainActivity extends AppCompatActivity
             public void success(List<User> users, Response response) {
                 if (response.getStatus() == 200) {
                     if(users!= null){
-                         userInfo = users.get(0);
+                        userInfo = users.get(0);
                         if(api.equals(userInfo.getApi_key())) {
                             comptefrg = new CmpFragment();
                             comptefrg.userCourant(userInfo);
+                            name.setText(userInfo.getPrenom()+" "+userInfo.getNom());
+                            mail.setText(userInfo.getMail());
                         }
                     }
 
