@@ -100,8 +100,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         });
 
-
-
                     }
                 }
                 else if(mail.trim().length() > 0){

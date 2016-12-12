@@ -1,9 +1,7 @@
 package com.maximeattoumani.darties_mobile.control.Fragment;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,30 +12,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.maximeattoumani.darties_mobile.R;
 import com.maximeattoumani.darties_mobile.control.Activity.FiltreActivity;
-import com.maximeattoumani.darties_mobile.control.Activity.LoginActivity;
-import com.maximeattoumani.darties_mobile.control.Activity.MainActivity;
 import com.maximeattoumani.darties_mobile.control.Adapter.MyFragmentPagerAdapter;
 import com.maximeattoumani.darties_mobile.model.ProduitAccueil;
 import com.maximeattoumani.darties_mobile.model.RowAccueil;
 import com.maximeattoumani.darties_mobile.model.SessionManager;
-import com.maximeattoumani.darties_mobile.model.User;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
 import com.maximeattoumani.darties_mobile.rest.ApiInterface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by melvi on 24/11/2016.
@@ -89,9 +79,9 @@ public class TableauxFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-        getTabAcc();
+                 getTabAcc();
                 try {
-                    Thread.sleep(3500);
+                   Thread.sleep(3500);
                 } catch (Exception e) {
                 }
                 ringProgressDialog.dismiss();
@@ -100,10 +90,6 @@ public class TableauxFragment extends Fragment {
 
         // END CALL API
         // View Pager
-
-
-
-
 
         // END View Pager
 
