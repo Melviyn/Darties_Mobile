@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
         session.checkLogin();
 
         this.infoCompte();
+
         TableauxFragment fragment = new TableauxFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();

@@ -10,13 +10,13 @@ public class Notification {
 
     private String message;
     private int id;
-    private String result;
+    private String title;
     private int id_user;
     private String date;
 
-    public Notification(String message, String result, int id_user, String date) {
+    public Notification(String title,String message, int id_user, String date) {
         this.message = message;
-        this.result = result;
+        this.title = title;
         this.id_user = id_user;
         this.date = date;
     }
@@ -24,7 +24,7 @@ public class Notification {
     public Notification() {
         this.message = "";
         this.id = 0;
-        this.result = "";
+        this.title = "";
         this.id_user = 0;
         this.date = "";
     }
@@ -47,12 +47,12 @@ public class Notification {
         this.id = id;
     }
 
-    public String getResult() {
-        return result;
+    public String getTitle() {
+        return title;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId_user() {

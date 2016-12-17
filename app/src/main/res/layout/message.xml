@@ -8,7 +8,8 @@
     <CheckBox
         android:layout_width="74dp"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox3" />
+        android:textColor="#000000"
+        android:id="@+id/checkBoxNotif" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,18 +24,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/text_login"
-            android:id="@+id/textView5"
+            android:id="@+id/titleNotif"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textAlignment="center"
+            android:textColor="#ec0c0c"
             android:layout_marginTop="2dp" />
 
         <TextView
             android:text="Message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:id="@+id/textView7"
+            android:textColor="#0a0000"
+            android:id="@+id/msgNotif"
             android:width="200dp"
             android:transformPivotX="0dp"
             android:layout_marginTop="5dp" />
@@ -50,9 +52,10 @@
             android:text="Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
+            android:id="@+id/dateNotif"
             android:layout_marginEnd="0dp"
             android:layout_marginTop="20dp"
+            android:textColor="#000000"
             android:textAlignment="center"
             android:textStyle="bold"
             android:textSize="16sp" />

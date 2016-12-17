@@ -18,6 +18,11 @@
             android:id="@+id/tabHis"
             android:icon="@drawable/tableau"
             android:title="Tableaux Historique" />
+
+        <item
+            android:id="@+id/gestion"
+            android:title="Gestion magasin"
+            android:visible="true"/>
     </group>
 
     <item android:title="Utilisateur">

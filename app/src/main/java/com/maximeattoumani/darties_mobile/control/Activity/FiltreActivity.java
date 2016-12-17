@@ -63,48 +63,7 @@ public class FiltreActivity extends Activity {
         spinner2 = (Spinner) findViewById(R.id.enseigne);
         spinner3 = (Spinner) findViewById(R.id.periode);
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                géo = parent.getItemAtPosition(position).toString();
-                for (Map.Entry<String, String> entry : codeGeo.entrySet()) {
-                    if (entry.getValue().equals(géo)) {
-                        //resultIntent.putExtra("géo",entry.getKey());
-                    }
-                }
 
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-                géo = arg0.getItemAtPosition(0).toString();
-                for (Map.Entry<String, String> entry : codeGeo.entrySet()) {
-                    if (entry.getValue().equals(géo)) {
-                        resultIntent.putExtra("géo",entry.getKey());
-                    }
-                }
-            }
-        });
-
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                enseigne = parent.getItemAtPosition(position).toString();
-                for (Map.Entry<String, String> entry : codeEns.entrySet()) {
-                    if (entry.getValue().equals(enseigne)) {
-                        resultIntent.putExtra("ens",entry.getKey());
-                    }
-                }
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-                enseigne = arg0.getItemAtPosition(0).toString();
-                for (Map.Entry<String, String> entry : codeEns.entrySet()) {
-                    if (entry.getValue().equals(enseigne)) {
-                        resultIntent.putExtra("ens",entry.getKey());
-                    }
-                }
-            }
-        });
 
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -200,6 +159,71 @@ public class FiltreActivity extends Activity {
         spinner2.setAdapter(dataAdapterEns);
         //resultIntent = new Intent();
 
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               Toast.makeText(parent.getContext(),"test",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        /*spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(FiltreActivity.this,
+                        "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
+                        Toast.LENGTH_SHORT).show();
+                géo = parent.getItemAtPosition(position).toString();
+                System.out.println("test");
+                for (Map.Entry<String, String> entry : codeGeo.entrySet()) {
+                    System.out.println("test"+entry.getKey());
+                    if (entry.getValue().equals(géo)) {
+                        resultIntent.putExtra("géo",entry.getKey());
+
+                    }
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                géo = arg0.getItemAtPosition(0).toString();
+                for (Map.Entry<String, String> entry : codeGeo.entrySet()) {
+                    if (entry.getValue().equals(géo)) {
+                        resultIntent.putExtra("géo",entry.getKey());
+                    }
+                }
+            }
+        }); */
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                enseigne = parent.getItemAtPosition(position).toString();
+                System.out.println("toto");
+                System.out.println(enseigne);
+                for (Map.Entry<String, String> entry : codeEns.entrySet()) {
+                    if (entry.getValue().equals(enseigne)) {
+                        resultIntent.putExtra("ens",entry.getKey());
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                enseigne = arg0.getItemAtPosition(0).toString();
+                System.out.println("titi");
+                for (Map.Entry<String, String> entry : codeEns.entrySet()) {
+                    if (entry.getValue().equals(enseigne)) {
+                        resultIntent.putExtra("ens",entry.getKey());
+                    }
+                }
+            }
+        });
+
         Button valider = (Button) findViewById(R.id.filtreValid);
 
         valider.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +234,8 @@ public class FiltreActivity extends Activity {
                 finish();
             }
         });
+
+
 
     }
 }
