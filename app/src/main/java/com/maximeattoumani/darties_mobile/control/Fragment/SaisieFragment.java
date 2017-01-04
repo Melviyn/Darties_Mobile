@@ -1,9 +1,11 @@
 package com.maximeattoumani.darties_mobile.control.Fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.util.SortedList;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.maximeattoumani.darties_mobile.R;
+import com.maximeattoumani.darties_mobile.control.Activity.MainActivity;
 import com.maximeattoumani.darties_mobile.model.FamProd;
 import com.maximeattoumani.darties_mobile.model.SessionManager;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
@@ -43,14 +46,13 @@ public class SaisieFragment extends Fragment{
     private ApiInterface apiService;
     private ArrayList<FamProd> prods;
     private int nbProd;
-    private static int prodAcu=0;
+    private static int prodActu=0;
     TextView prodName;
+    private Button back,next;
     private  String[] nomMois = { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
             "Août", "Septembre", "Octobre", "Novembre", "Décembre" };
 
-
-
-
+    private HashMap<String,Integer> tabSaisi;
     public SaisieFragment(){
 
     }
@@ -58,9 +60,18 @@ public class SaisieFragment extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.saisie_layout,container,false);
+        final View rootView = inflater.inflate(R.layout.saisie_layout,container,false);
         prods = new ArrayList<FamProd>();
+        tabSaisi=new HashMap<String,Integer>();
         prodName= (TextView) rootView.findViewById((R.id.prodName));
+        next = (Button) rootView.findViewById(R.id.next);
+        next.setVisibility(next.INVISIBLE);
+        if(prodActu!=nbProd){
+
+            next.setVisibility(back.VISIBLE);
+        }
+
+
         TextView moisVentes = (TextView) rootView.findViewById(R.id.moisVentes);
         RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
         //EditText saisie=(EditText) rootView.findViewById(R.id.Valeurs);
@@ -68,7 +79,12 @@ public class SaisieFragment extends Fragment{
         objectif.setText("1500");
         TextView ventes = (TextView) rootView.findViewById((R.id.moisVentesReelVal)) ;
         ventes.setText("500");
-        ProgressBar progBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+
+        final EditText ventesSaisi = (EditText) rootView.findViewById(R.id.saisieVentes);
+        final EditText margeSaisi = (EditText) rootView.findViewById(R.id.SaisiMarge);
+        final EditText caSaisi = (EditText) rootView.findViewById(R.id.SaisiChiffreAffaire);
+
+        final ProgressBar progBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         //Button bValider= (Button) rootView.findViewById(R.id.buttonValide) ;
 
         Calendar cal = Calendar.getInstance();
@@ -99,14 +115,14 @@ public class SaisieFragment extends Fragment{
 
                 nbProd=famProds.size();
                 System.out.println("Nombre de produit : "+nbProd);
-                for(int i =0;i< nbProd;i++){
+                //for(int i =0;i< nbProd;i++){
                     FamProd tmp = new FamProd();
-                    tmp.setDATEMAJ_FAMPROD(famProds.get(i).getDATEMAJ_FAMPROD());
-                    tmp.setID_FAMILLE_PRODUIT(famProds.get(i).getID_FAMILLE_PRODUIT());
-                    tmp.setLIB_FAMILLE_PRODUIT(famProds.get(i).getLIB_FAMILLE_PRODUIT());
+                    tmp.setDATEMAJ_FAMPROD(famProds.get(prodActu).getDATEMAJ_FAMPROD());
+                    tmp.setID_FAMILLE_PRODUIT(famProds.get(prodActu).getID_FAMILLE_PRODUIT());
+                    tmp.setLIB_FAMILLE_PRODUIT(famProds.get(prodActu).getLIB_FAMILLE_PRODUIT());
                     prods.add(tmp);
 
-                }
+                //}
                 prodName.setText(prods.get(0).getLIB_FAMILLE_PRODUIT());
 
             }
@@ -125,7 +141,15 @@ public class SaisieFragment extends Fragment{
         });
 
 
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*tabSaisi.put("ventes",Integer.parseInt(ventesSaisi.getText().toString()) );
+                tabSaisi.put("marge",Integer.parseInt(margeSaisi.getText().toString()) );
+                tabSaisi.put("ca",Integer.parseInt(caSaisi.getText().toString()) );*/
 
+            }
+        });
 
 
         //Barre de progression de l'objectif
@@ -137,7 +161,10 @@ public class SaisieFragment extends Fragment{
 
         return rootView;
     }
+    public void setItemNb(int nb){
 
+        this.prodActu=nb;
+    }
 
 }
 

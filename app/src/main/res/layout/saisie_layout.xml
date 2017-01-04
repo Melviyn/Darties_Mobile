@@ -104,12 +104,12 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/saisieVentes"
-                android:text="Saisie des ventes"
                 android:textAlignment="center"
                 style="@style/Widget.AppCompat.EditText"
                 android:textColor="?attr/colorControlNormal"
                 android:textSize="20sp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:hint="Saisie des ventes" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -164,13 +164,13 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/SaisiMarge"
-                android:text="Saisie de la marge"
                 android:fontFamily="sans-serif"
                 android:textAlignment="center"
                 style="@style/Widget.AppCompat.EditText"
                 android:textSize="20sp"
                 android:textColor="?attr/colorControlNormal"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:hint="Saisie de la marge" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -263,17 +263,18 @@
                 android:layout_marginTop="0dp">
 
                 <Button
-                    android:text="Button"
+                    android:text="Back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button3"
-                    android:layout_weight="1" />
+                    android:id="@+id/back"
+                    android:layout_weight="1"
+                    android:visibility="invisible" />
 
                 <Button
-                    android:text="Button"
+                    android:text="valider"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button2"
+                    android:id="@+id/next"
                     android:layout_weight="1" />
             </LinearLayout>
 

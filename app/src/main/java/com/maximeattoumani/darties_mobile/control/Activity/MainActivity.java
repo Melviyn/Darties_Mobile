@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.saisie) {
-            SaisieFragment fragment = new SaisieFragment();
+            SaisieFragment fragment = new TableauSaisiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main,fragment);
             fragmentTransaction.commit();
