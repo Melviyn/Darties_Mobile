@@ -61,17 +61,17 @@ public class TableauSaisiFragment extends Fragment {
 
         apiService = ApiClient.getClient();
 
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(rootView.getContext(), "Veuillez patienter", "récupération de données ...", true);
-        ringProgressDialog.setCancelable(true);
-                    SaisieFragment ca_frag = new SaisieFragment();
-                    SaisieFragment vente_frag = new SaisieFragment();
-                    SaisieFragment marge_frag = new SaisieFragment();
-                    ca_frag.setItemNb(0);
-                    vente_frag.setItemNb(1);
-                    marge_frag.setItemNb(2);
-                    fragmentList.add(ca_frag);
-                    fragmentList.add(vente_frag);
-                    fragmentList.add(marge_frag);
+                    SaisieFragment saisi1 = new SaisieFragment();
+                    SaisieFragment saisi2 = new SaisieFragment();
+                    SaisieFragment saisi3 = new SaisieFragment();
+
+                    saisi1.setItemNb(0);
+                    fragmentList.add(saisi1);
+                    saisi2.setItemNb(1);
+
+                    fragmentList.add(saisi2);
+                     saisi3.setItemNb(2);
+                    fragmentList.add(saisi3);
 
                     MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(),fragmentList);
                     viewPager.setAdapter(myFragmentPagerAdapter);

@@ -66,9 +66,9 @@ public class SaisieFragment extends Fragment{
         prodName= (TextView) rootView.findViewById((R.id.prodName));
         next = (Button) rootView.findViewById(R.id.next);
         next.setVisibility(next.INVISIBLE);
-        if(prodActu!=nbProd){
+        if(prodActu!=2){
 
-            next.setVisibility(back.VISIBLE);
+            next.setVisibility(next.VISIBLE);
         }
 
 

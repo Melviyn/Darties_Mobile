@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.maximeattoumani.darties_mobile.R;
 import com.maximeattoumani.darties_mobile.control.Fragment.CmpFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.SaisieFragment;
+import com.maximeattoumani.darties_mobile.control.Fragment.TableauSaisiFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.TableauxFragment;
 import com.maximeattoumani.darties_mobile.model.SessionManager;
 import com.maximeattoumani.darties_mobile.model.User;
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.saisie) {
-            SaisieFragment fragment = new TableauSaisiFragment();
+            TableauSaisiFragment fragment = new TableauSaisiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main,fragment);
             fragmentTransaction.commit();
