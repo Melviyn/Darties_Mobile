@@ -14,4 +14,5 @@
     tools:context="com.maximeattoumani.darties_mobile.control.Activity.LoginActivity"
     tools:showIn="@layout/app_bar_main">
 
+
 </RelativeLayout>

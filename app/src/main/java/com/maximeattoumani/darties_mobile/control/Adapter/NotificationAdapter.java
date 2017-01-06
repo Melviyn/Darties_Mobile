@@ -58,4 +58,6 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         public TextView message;
         public TextView date;
     }
+
+
 }

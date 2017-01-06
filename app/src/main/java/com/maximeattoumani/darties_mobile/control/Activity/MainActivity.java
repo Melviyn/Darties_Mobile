@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     private User userInfo;
     private TextView name;
     private TextView mail;
+    private ListView listN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +147,8 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
