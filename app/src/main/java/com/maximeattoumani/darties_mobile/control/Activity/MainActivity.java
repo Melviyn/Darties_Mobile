@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.maximeattoumani.darties_mobile.R;
 import com.maximeattoumani.darties_mobile.control.Fragment.AccueilFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.CmpFragment;
+import com.maximeattoumani.darties_mobile.control.Fragment.ModifCmpFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.SaisieFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.TableauSaisiFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.TableauxFragment;
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity
     private TextView name;
     private TextView mail;
     private ListView listN;
+    ModifCmpFragment modifCmpFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +145,14 @@ public class MainActivity extends AppCompatActivity
 
         if(id == R.id.delete){
             Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.action_modif){
+            Toast.makeText(this,"modif",Toast.LENGTH_LONG).show();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_main, modifCmpFragment);
+            fragmentTransaction.commit();
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
 
 
@@ -228,8 +239,11 @@ public class MainActivity extends AppCompatActivity
                         if(api.equals(userInfo.getApi_key())) {
                             comptefrg = new CmpFragment();
                             comptefrg.userCourant(userInfo);
+                            modifCmpFragment = new ModifCmpFragment();
+                            modifCmpFragment.userCourant(userInfo);
                             name.setText(userInfo.getPrenom()+" "+userInfo.getNom());
                             mail.setText(userInfo.getMail());
+
                         }
                     }
 
