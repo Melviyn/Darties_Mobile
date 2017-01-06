@@ -22,11 +22,17 @@ public class Vente_fragment extends android.support.v4.app.Fragment {
 
     private List<RowAccueil> info;
     ListView listVente;
+    View v;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.vente_layout,container, false);
+
+        if(v == null){
+         v = inflater.inflate(R.layout.vente_layout,container, false);
+        }
+
         listVente = (ListView) v.findViewById(R.id.listVente);
 
         RowAccueilAdapter adapter = new RowAccueilAdapter(getActivity().getApplicationContext(), info);

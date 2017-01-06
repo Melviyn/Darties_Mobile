@@ -3,20 +3,42 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/acc"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="Accueil" />
+        <item
             android:id="@+id/saisie"
+            android:icon="@android:drawable/ic_input_add"
             android:title="Saisie" />
         <item
-            android:id="@+id/tab"
-            android:title="Tableaux" />
+        android:id="@+id/tabAcc"
+        android:icon="@drawable/tableau"
+        android:title="Tableaux Accueil" />
+        <item
+            android:id="@+id/tabHis"
+            android:icon="@drawable/tableau"
+            android:title="Tableaux Historique" />
+
+        <item
+            android:id="@+id/gestion"
+            android:title="Gestion magasin"
+            android:visible="true"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Utilisateur">
         <menu>
             <item
+                android:id="@+id/monComp"
+                android:icon="@drawable/avatar"
+                android:title="Mon Compte" />
+            <item
                 android:id="@+id/deconnect"
+                android:icon="@android:drawable/ic_lock_power_off"
                 android:title="Deconnexion" />
 
         </menu>
     </item>
+
+
 
 </menu>

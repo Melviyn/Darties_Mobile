@@ -13,6 +13,8 @@ import com.maximeattoumani.darties_mobile.model.SessionManager;
 import com.maximeattoumani.darties_mobile.model.User;
 import com.maximeattoumani.darties_mobile.rest.ApiInterface;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Maxime on 01/12/2016.
  */
@@ -24,6 +26,7 @@ public class CmpFragment extends android.support.v4.app.Fragment {
     private TextView prenom;
     private TextView pwd;
     private TextView adresse;
+    private TextView libelle;
     private Button logout;
     private ApiInterface apiService;
     private SessionManager session;
@@ -48,12 +51,14 @@ public class CmpFragment extends android.support.v4.app.Fragment {
         prenom = (TextView) rootView.findViewById(R.id.prenom);
         pwd = (TextView) rootView.findViewById(R.id.pwd);
         adresse = (TextView) rootView.findViewById(R.id.adresse);
+        libelle = (TextView) rootView.findViewById(R.id.libelle);
 
         id.setText(Html.fromHtml("Id : <b>" + user.getId_profil() + "</b>"));
         nom.setText(Html.fromHtml("Nom : <b>" + user.getNom() + "</b>"));
         prenom.setText(Html.fromHtml("Prénom : <b>" + user.getPrenom() + "</b>"));
         adresse.setText(Html.fromHtml("Email : <b>" + user.getMail() + "</b>"));
         pwd.setText(Html.fromHtml("Mot de passe : <b>" + user.getPassword() + "</b>"));
+        libelle.setText(Html.fromHtml("<b>" + user.getLib_profil() + "</b>"));
 
         return rootView;
     }

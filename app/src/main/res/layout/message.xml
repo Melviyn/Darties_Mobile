@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <CheckBox
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/checkBoxNotif"
+        android:textColorLink="?android:attr/textColorPrimaryDisableOnly"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="20dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="116dp"
+        android:layout_height="74dp"
+
+        android:weightSum="1"
+        android:layout_weight="0.79">
+
+        <TextView
+            android:text="Titre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_login"
+            android:id="@+id/titleNotif"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="#ec0c0c"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:text="Message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#0a0000"
+            android:id="@+id/msgNotif"
+            android:width="200dp"
+            android:transformPivotX="0dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="74dp"
+        android:layout_width="57dp"
+        android:layout_weight="0.21">
+
+        <TextView
+            android:text="Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateNotif"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="10sp" />
+    </LinearLayout>
+</LinearLayout>

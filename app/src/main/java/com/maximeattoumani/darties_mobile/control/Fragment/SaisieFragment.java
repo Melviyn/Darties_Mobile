@@ -93,8 +93,7 @@ public class SaisieFragment extends Fragment{
         //Session
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
-        HashMap<String,String> user = session.getAPI();
-        api = user.get(SessionManager.KEY_API);
+        api = session.getKeyApi();
         // END SESSION
 
 

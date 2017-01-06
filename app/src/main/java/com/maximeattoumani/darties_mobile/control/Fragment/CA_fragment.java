@@ -24,13 +24,15 @@ public class CA_fragment extends Fragment {
 
     private List<RowAccueil> info;
     ListView listCa;
-
+    View v;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.ca_layout,container, false);
+        if(v == null){
+            v = inflater.inflate(R.layout.ca_layout,container, false);
+        }
         listCa = (ListView) v.findViewById(R.id.listCa);
 
         RowAccueilAdapter adapter = new RowAccueilAdapter(getActivity().getApplicationContext(), info);

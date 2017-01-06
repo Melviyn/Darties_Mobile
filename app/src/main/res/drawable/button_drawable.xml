@@ -6,18 +6,18 @@
                 android:width="5dp"
                 android:color="#e7f50e0e"/>
             <corners
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp"
-                android:bottomRightRadius="10dp"
-                android:bottomLeftRadius="10dp"
+                android:topLeftRadius="5dp"
+                android:topRightRadius="5dp"
+                android:bottomRightRadius="5dp"
+                android:bottomLeftRadius="5dp"
                 />
 
             <padding
-                android:left="5dp"
-                android:right="5dp"
-                android:top="1dp"
-                android:bottom="10dp"/>
-            <solid android:color="#f7fbf9f9"/>
+                android:left="0dp"
+                android:right="0dp"
+                android:top="0dp"
+                android:bottom="0dp"/>
+            <solid android:color="#e7f50e0e"/>
         </shape>
     </item>
 
@@ -25,7 +25,7 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <stroke
                 android:width="5dp"
-                android:color="#ffe4c4"/>
+                android:color="#e7f50e0e"/>
             <corners
                 android:topLeftRadius="10dp"
                 android:topRightRadius="10dp"
@@ -38,20 +38,17 @@
                 android:right="10dp"
                 android:top="1dp"
                 android:bottom="10dp"/>
-            <solid android:color="#ffe4c4"/>
+            <solid android:color="#e7f50e0e"/>
         </shape>
     </item>
 
     <item >
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <stroke
-                android:width="5dp"
-                android:color="#ffe4c4"/>
+                android:width="2dp"
+                android:color="#f34d4040"/>
             <corners
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp"
-                android:bottomRightRadius="10dp"
-                android:bottomLeftRadius="10dp"
+                android:radius="10dp"
                 />
 
             <padding
@@ -59,7 +56,7 @@
                 android:right="10dp"
                 android:top="1dp"
                 android:bottom="10dp"/>
-            <solid android:color="#ffe4c4"/>
+            <solid android:color="#e7f50e0e"/>
         </shape>
     </item>
 

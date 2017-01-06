@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.maximeattoumani.darties_mobile.control.Activity.LoginActivity;
+import com.maximeattoumani.darties_mobile.control.Activity.MainActivity;
 
 import java.util.HashMap;
 
@@ -41,6 +42,11 @@ public class SessionManager {
         return user;
     }
 
+    public void addValueString(String key, String value){
+        editor.putString(key,value);
+        editor.commit();
+    }
+
     /*Vérifie si la variable de session est toujours à true
     sinon on redirige l'utilisateur sur l'interface connexion*/
     public void checkLogin(){
@@ -57,6 +63,14 @@ public class SessionManager {
         }
 
     }
+
+    public String getKeyApi(){
+        return pref.getString(KEY_API,null);
+    }
+
+    public String getStringValue(String key){
+        return pref.getString(key,null);
+    }
     //Supprime tous les variable de session et redirige l'utilisateur sur l'interface connexion
     public void logoutUser(){
         editor.clear();
@@ -69,5 +83,7 @@ public class SessionManager {
 
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
+
     }
+
 }
