@@ -46,7 +46,7 @@ public class SaisieFragment extends Fragment{
     private ApiInterface apiService;
     private ArrayList<FamProd> prods;
     private int nbProd;
-    private static int prodActu=0;
+    private int prodActu=0;
     TextView prodName;
     private Button back,next;
     private  String[] nomMois = { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
