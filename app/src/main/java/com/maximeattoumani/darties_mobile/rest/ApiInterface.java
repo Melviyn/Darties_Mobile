@@ -59,6 +59,6 @@ public static final String ENDPOINT = "http://darties1equipea.ddns.net/Darties_E
                              Callback<List<FamProd>> callback);
 
     @GET("/apiCall.php/getFaitsVentes/{token}")
-    void listFaisVentesAsync(@Path("token")String token,
+    void listFaitsVentesAsync(@Path("token")String token,
                              Callback<List<FaitsVentes>> callback);
 }
