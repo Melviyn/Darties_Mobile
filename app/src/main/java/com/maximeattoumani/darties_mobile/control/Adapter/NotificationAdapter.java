@@ -33,7 +33,6 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         NotifViewHolder viewHolder = (NotifViewHolder) convertView.getTag();
         if(viewHolder == null){
             viewHolder = new NotifViewHolder();
-            viewHolder.check = (CheckBox) convertView.findViewById(R.id.checkBoxNotif);
             viewHolder.title = (TextView) convertView.findViewById(R.id.titleNotif);
             viewHolder.message = (TextView) convertView.findViewById(R.id.msgNotif);
             viewHolder.date = (TextView) convertView.findViewById(R.id.dateNotif);
@@ -53,7 +52,6 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
     }
 
     private class NotifViewHolder{
-        public CheckBox check;
         public TextView title;
         public TextView message;
         public TextView date;

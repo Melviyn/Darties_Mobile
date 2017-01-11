@@ -62,10 +62,10 @@ public class ModifCmpFragment extends android.support.v4.app.Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_modif_cmp,container,false);
+        /*rootView = inflater.inflate(R.layout.fragment_modif_cmp,container,false);
         valider = (Button) rootView.findViewById(R.id.button_valider);
         newAdress = (EditText) rootView.findViewById(R.id.editText_adresse);
-        newPwd = (EditText) rootView.findViewById(R.id.editText_pwd);
+        newPwd = (EditText) rootView.findViewById(R.id.editText_pwd);*/
 
 
 

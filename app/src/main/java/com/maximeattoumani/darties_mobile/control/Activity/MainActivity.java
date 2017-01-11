@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.maximeattoumani.darties_mobile.R;
 import com.maximeattoumani.darties_mobile.control.Fragment.AccueilFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.CmpFragment;
+import com.maximeattoumani.darties_mobile.control.Fragment.Gestion_Magasin_Fragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.ModifCmpFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.SaisieFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.TableauSaisiFragment;
@@ -69,10 +70,7 @@ public class MainActivity extends AppCompatActivity
 
         this.infoCompte();
 
-        TableauxFragment fragment = new TableauxFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
-                getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content_main,fragment);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -145,7 +143,7 @@ public class MainActivity extends AppCompatActivity
 
         if(id == R.id.delete){
             Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.action_modif){
+        }/*else if (id == R.id.action_modif){
             Toast.makeText(this,"modif",Toast.LENGTH_LONG).show();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main, modifCmpFragment);
@@ -153,7 +151,7 @@ public class MainActivity extends AppCompatActivity
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-        }
+        }*/
 
 
 
@@ -220,6 +218,14 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.content_main, comptefrg);
             fragmentTransaction.commit();
         }
+
+        else if(id == R.id.gestion){
+            Gestion_Magasin_Fragment fragment = new Gestion_Magasin_Fragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_main,fragment);
+            fragmentTransaction.commit();
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
