@@ -73,7 +73,7 @@ public class TableauSaisiFragment extends Fragment {
                      saisi3.setItemNb(2);
                     fragmentList.add(saisi3);
 
-                    MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(),fragmentList);
+                    MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(),fragmentList);
                     viewPager.setAdapter(myFragmentPagerAdapter);
 
 
