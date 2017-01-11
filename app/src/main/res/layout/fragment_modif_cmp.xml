@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/adresse"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/prenom"
+        android:layout_alignStart="@+id/prenom"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="MODIFICATION COMPTE"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="42dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/pwd"
+        android:layout_marginTop="33dp"
+        android:textSize="16sp"
+        android:layout_below="@+id/adresse"
+        android:layout_alignStart="@+id/adresse" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/id"
+        android:layout_marginTop="37dp"
+        android:textSize="16sp"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/nom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/nom"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="26dp"
+        android:textSize="16sp"
+        android:layout_below="@+id/id"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/prenom"
+        android:layout_marginTop="25dp"
+        android:textSize="16sp"
+        android:layout_below="@+id/nom"
+        android:layout_alignStart="@+id/nom" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Password"
+        android:ems="6"
+        android:id="@+id/editText_pwd"
+        android:layout_alignBaseline="@+id/pwd"
+        android:layout_alignBottom="@+id/pwd"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="23dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Mail"
+        android:ems="6"
+        android:id="@+id/editText_adresse"
+        android:layout_alignBaseline="@+id/adresse"
+        android:layout_alignBottom="@+id/adresse"
+        android:layout_alignEnd="@+id/editText_pwd" />
+
+    <Button
+        android:text="Valider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_valider"
+        android:elevation="0dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_below="@+id/editText_pwd"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
