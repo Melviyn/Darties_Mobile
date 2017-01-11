@@ -1,6 +1,7 @@
 package com.maximeattoumani.darties_mobile.rest;
 
 import com.maximeattoumani.darties_mobile.model.Enseigne;
+import com.maximeattoumani.darties_mobile.model.FaitsVentes;
 import com.maximeattoumani.darties_mobile.model.FamProd;
 import com.maximeattoumani.darties_mobile.model.Geographie;
 import com.maximeattoumani.darties_mobile.model.ProduitAccueil;
@@ -56,4 +57,8 @@ public static final String ENDPOINT = "http://darties1equipea.ddns.net/Darties_E
     @GET("/apiCall.php/getDimFamilleProduit/{token}")
     void listFamProduitAsync(@Path("token")String token,
                              Callback<List<FamProd>> callback);
+
+    @GET("/apiCall.php/getFaitsVentes/{token}")
+    void listFaitsVentesAsync(@Path("token")String token,
+                             Callback<List<FaitsVentes>> callback);
 }
