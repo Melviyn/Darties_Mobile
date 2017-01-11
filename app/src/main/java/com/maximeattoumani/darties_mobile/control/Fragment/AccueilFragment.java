@@ -115,7 +115,6 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
                             moisUp=Integer.parseInt(parts[1]);
                             anneeUp=Integer.parseInt(parts[0]);
 
-                           // System.out.println(anneeUp == 2017);
                             if(jour >=1 && jour <=10){
                                 if(moisUp == mois && anneeUp==annee){
 
@@ -135,7 +134,7 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
                                 }*/
 
                             }
-                            else if(jour >=10 && jour <=20){
+                            else if(jour > 10 && jour <=20){
                                 if(moisUp == mois && anneeUp==annee){
 
                                     if(jourUp >= 17 && jourUp <=20) {
@@ -156,7 +155,7 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
                                     test.add(new Notification("test","message de test",1,"16/02/1996"));
                                 }*/
                             }
-                            else if(jour >=20 && jour<=20) {
+                            else if(jour > 20 && jour<=31) {
                                 if (moisUp == mois && anneeUp == annee) {
 
                                     if (jourUp >= 28 && jourUp <= 31) {
