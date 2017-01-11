@@ -86,7 +86,7 @@
                     android:id="@+id/moisVentesObjVal"
                     android:textAlignment="center"
                     android:textSize="14sp"
-                    android:layout_weight="1.03" />
+                    android:layout_weight="0.90" />
 
                 <TextView
                     android:text="0000"

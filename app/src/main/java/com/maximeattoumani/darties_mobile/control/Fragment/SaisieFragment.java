@@ -3,6 +3,7 @@ package com.maximeattoumani.darties_mobile.control.Fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -68,7 +69,7 @@ public class SaisieFragment extends Fragment{
         prodName= (TextView) rootView.findViewById((R.id.prodName));
         next = (Button) rootView.findViewById(R.id.next);
         next.setVisibility(next.INVISIBLE);
-        if(prodActu!=2){
+        if(prodActu==2){
 
             next.setVisibility(next.VISIBLE);
         }
@@ -107,12 +108,9 @@ public class SaisieFragment extends Fragment{
             public void success(List<FaitsVentes> faitsVentes, Response response) {
 
                 int nbLigne=faitsVentes.size();
-                //System.out.println("TESSSSSST:    "+faitsVentes.get(0).getID_TEMPS().equals("201301"));
                 for(int i=0;i<nbLigne;i++){
 
-                    if(faitsVentes.get(i).getID_TEMPS().equals("201301")){
-                        //System.out.println("TESSSSSST2:    "+faitsVentes.get(i).getID_TEMPS());
-                        //System.out.println(faitsVentes.get(i).getMARGE_OBJECTIF());
+                    if(faitsVentes.get(i).getID_TEMPS().equals("201302")& faitsVentes.get(i).getID_FAMILLE_PRODUIT().equals(Integer.toString(prodActu+1))&faitsVentes.get(i).getID_MAGASIN().equals(session.getStringValue("id_zone"))&prodActu<3){
 
                         margeOBJ= faitsVentes.get(i).getMARGE_OBJECTIF();
                         margeREEL= faitsVentes.get(i).getMARGE_REEL();
@@ -137,15 +135,8 @@ public class SaisieFragment extends Fragment{
                         progBar.setProgress(Math.round(Float.parseFloat(caReel.getText().toString())));
 
 
-
                     }
-
-
-
                 }
-
-
-
             }
 
             @Override
@@ -165,7 +156,7 @@ public class SaisieFragment extends Fragment{
 
 
                 nbProd=famProds.size();
-                System.out.println("Nombre de produit : "+nbProd);
+                //System.out.println("Nombre de produit : "+nbProd);
                 //for(int i =0;i< nbProd;i++){
                     FamProd tmp = new FamProd();
                     tmp.setDATEMAJ_FAMPROD(famProds.get(prodActu).getDATEMAJ_FAMPROD());
@@ -195,7 +186,19 @@ public class SaisieFragment extends Fragment{
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("   !!!!!!!!!!!!!!!!!!!!!");
+                apiService.setFaitsVentes(api,session.getStringValue("id_zone"),Integer.toString(prodActu),"201701","0",ventesSaisi.getText().toString(),"0",caSaisi.getText().toString(),"0",margeSaisi.getText().toString(), new Callback<List<FaitsVentes>>() {
+                    @Override
+                    public void success(List<FaitsVentes> faitsVentes, Response response) {
+                    System.out.println(" CA A MARCHERRRRR  !!!!!!!!!!!!!!!!!!!!!");
 
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
 
                 /*tabSaisi.put("ventes",Integer.parseInt(ventesSaisi.getText().toString()) );
                 tabSaisi.put("marge",Integer.parseInt(margeSaisi.getText().toString()) );

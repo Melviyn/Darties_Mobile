@@ -6,16 +6,16 @@ package com.maximeattoumani.darties_mobile.model;
 
 public class Profil {
 
-    private int id_profil;
+    private String id_profil;
     private String lib_profil;
     private String type_zone;
     private String id_zone;
 
-    public int getId_profil() {
+    public String getId_profil() {
         return id_profil;
     }
 
-    public void setId_profil(int id_profil) {
+    public void setId_profil(String id_profil) {
         this.id_profil = id_profil;
     }
 

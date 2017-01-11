@@ -61,4 +61,16 @@ public static final String ENDPOINT = "http://darties1equipea.ddns.net/Darties_E
     @GET("/apiCall.php/getFaitsVentes/{token}")
     void listFaitsVentesAsync(@Path("token")String token,
                              Callback<List<FaitsVentes>> callback);
+    @GET("/apiCall.php/setFaitsVentes/{token}&{id_magasin}&{id_prod}&{id_temps}&{vObj}&{vReel}&{cObj}&{cReel}&{mObj}&{mReel}")
+    void setFaitsVentes(@Path("token")String token,
+                        @Path("id_magasin")String id_magasin,
+                        @Path("id_prod")String id_prod,
+                        @Path("id_temps")String id_temps,
+                        @Path("vObj")String vObj,
+                        @Path("vReel")String vReel,
+                        @Path("cObj")String cObj,
+                        @Path("cReel")String cReel,
+                        @Path("mObj")String mObj,
+                        @Path("mReel")String mReel,
+                        Callback<List<FaitsVentes>> callback);
 }
