@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.maximeattoumani.darties_mobile.R;
 import com.maximeattoumani.darties_mobile.control.Activity.MainActivity;
+import com.maximeattoumani.darties_mobile.model.FaitsVentes;
 import com.maximeattoumani.darties_mobile.model.FamProd;
 import com.maximeattoumani.darties_mobile.model.SessionManager;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
@@ -42,8 +43,9 @@ import retrofit.client.Response;
 
 public class SaisieFragment extends Fragment{
     private SessionManager session;
-    private String api;
+    private String api,idMag;
     private ApiInterface apiService;
+    private String ventesOBJ,ventesREEL,caOBJ,caREEL,margeOBJ,margeREEL="";
     private ArrayList<FamProd> prods;
     private int nbProd;
     private int prodActu=0;
@@ -75,10 +77,12 @@ public class SaisieFragment extends Fragment{
         TextView moisVentes = (TextView) rootView.findViewById(R.id.moisVentes);
         RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
         //EditText saisie=(EditText) rootView.findViewById(R.id.Valeurs);
-        TextView objectif = (TextView) rootView.findViewById((R.id.moisVentesObjVal)) ;
-        objectif.setText("1500");
-        TextView ventes = (TextView) rootView.findViewById((R.id.moisVentesReelVal)) ;
-        ventes.setText("500");
+        final TextView ventesObj = (TextView) rootView.findViewById((R.id.moisVentesObjVal)) ;
+        final TextView ventesReel = (TextView) rootView.findViewById((R.id.moisVentesReelVal)) ;
+        final TextView caObj = (TextView) rootView.findViewById(R.id.caObj);
+        final TextView caReel=(TextView) rootView.findViewById(R.id.caReel);
+        final TextView margeObj=(TextView) rootView.findViewById(R.id.margeObj);
+        final TextView margeReel=(TextView) rootView.findViewById(R.id.margeReel);
 
         final EditText ventesSaisi = (EditText) rootView.findViewById(R.id.saisieVentes);
         final EditText margeSaisi = (EditText) rootView.findViewById(R.id.SaisiMarge);
@@ -95,12 +99,60 @@ public class SaisieFragment extends Fragment{
         session.checkLogin();
         api = session.getKeyApi();
         // END SESSION
-
-
-
-
+        idMag=session.getStringValue("id_zone");
 
         apiService = ApiClient.getClient();
+        apiService.listFaitsVentesAsync(api, new Callback<List<FaitsVentes>>() {
+            @Override
+            public void success(List<FaitsVentes> faitsVentes, Response response) {
+
+                int nbLigne=faitsVentes.size();
+                //System.out.println("TESSSSSST:    "+faitsVentes.get(0).getID_TEMPS().equals("201301"));
+                for(int i=0;i<nbLigne;i++){
+
+                    if(faitsVentes.get(i).getID_TEMPS().equals("201301")){
+                        //System.out.println("TESSSSSST2:    "+faitsVentes.get(i).getID_TEMPS());
+                        //System.out.println(faitsVentes.get(i).getMARGE_OBJECTIF());
+
+                        margeOBJ= faitsVentes.get(i).getMARGE_OBJECTIF();
+                        margeREEL= faitsVentes.get(i).getMARGE_REEL();
+                        ventesOBJ= faitsVentes.get(i).getVENTES_OBJECTF();
+                        ventesREEL= faitsVentes.get(i).getVENTES_REEL();
+                        caOBJ= faitsVentes.get(i).getCA_OBJECTIF();
+                        caREEL= faitsVentes.get(i).getCA_REEL();
+                       // System.out.println(caOBJ);
+
+                        ventesObj.setText(ventesOBJ);
+                        ventesReel.setText(ventesREEL);
+                        caObj.setText(caOBJ);
+                        caReel.setText(caREEL);
+                        margeObj.setText(margeOBJ);
+                        margeReel.setText(margeREEL);
+
+
+
+                        //Barre de progression de l'objectif
+                        progBar.setMax(Math.round(Float.parseFloat(caObj.getText().toString())));
+
+                        progBar.setProgress(Math.round(Float.parseFloat(caReel.getText().toString())));
+
+
+
+                    }
+
+
+
+                }
+
+
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
         apiService.listFamProduitAsync(api, new Callback<List<FamProd>>() {
             /**
              * Successful HTTP response.
@@ -143,6 +195,8 @@ public class SaisieFragment extends Fragment{
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 /*tabSaisi.put("ventes",Integer.parseInt(ventesSaisi.getText().toString()) );
                 tabSaisi.put("marge",Integer.parseInt(margeSaisi.getText().toString()) );
                 tabSaisi.put("ca",Integer.parseInt(caSaisi.getText().toString()) );*/
@@ -150,10 +204,6 @@ public class SaisieFragment extends Fragment{
             }
         });
 
-
-        //Barre de progression de l'objectif
-        progBar.setMax(Integer.parseInt( objectif.getText().toString()));
-        progBar.setProgress(Integer.parseInt( ventes.getText().toString()));
 
 
 
