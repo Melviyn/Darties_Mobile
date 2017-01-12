@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity
     private TextView mail;
     private ListView listN;
     ModifCmpFragment modifCmpFragment;
+    AccueilFragment accueil;
+    Menu myMenu;
 
 
     @Override
@@ -67,9 +69,9 @@ public class MainActivity extends AppCompatActivity
 
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
-
+        String libelle=session.getStringValue("LIB_PROFIL");
+        System.out.println(libelle);
         this.infoCompte();
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,8 +91,21 @@ public class MainActivity extends AppCompatActivity
         name = (TextView) headerview.findViewById(R.id.nomprenom);
         mail = (TextView) headerview.findViewById(R.id.mail);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        Menu nav_Menu = navigationView.getMenu();
 
+
+        /*if(libelle.equals("Directeur Nord_Est") || libelle.equals("Directeur Sud_Ouest")
+                || libelle.equals("Directeur Sud_Est") || libelle.equals("Directeur Region_parisienne")
+                || libelle.equals("Directeur Nord_Ouest")){
+            nav_Menu.findItem(R.id.saisie).setVisible(false);
+            nav_Menu.findItem(R.id.acc).setVisible(false);
+        }
+        else {
+            nav_Menu.findItem(R.id.gestion).setVisible(false);
+        }*/
+
+
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -143,7 +158,7 @@ public class MainActivity extends AppCompatActivity
 
         if(id == R.id.delete){
             Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-        }/*else if (id == R.id.action_modif){
+        }else if (id == R.id.action_modif){
             Toast.makeText(this,"modif",Toast.LENGTH_LONG).show();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main, modifCmpFragment);
@@ -151,7 +166,7 @@ public class MainActivity extends AppCompatActivity
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-        }*/
+        }
 
 
 
@@ -206,9 +221,8 @@ public class MainActivity extends AppCompatActivity
 
         else if(id == R.id.acc){
 
-            AccueilFragment fragment = new AccueilFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_main,fragment);
+            fragmentTransaction.replace(R.id.content_main,accueil);
             fragmentTransaction.commit();
         }
 
@@ -246,7 +260,9 @@ public class MainActivity extends AppCompatActivity
                             comptefrg = new CmpFragment();
                             comptefrg.userCourant(userInfo);
                             modifCmpFragment = new ModifCmpFragment();
+                            accueil = new AccueilFragment();
                             modifCmpFragment.userCourant(userInfo);
+                            accueil.NotifCourant(userInfo);
                             name.setText(userInfo.getPrenom()+" "+userInfo.getNom());
                             mail.setText(userInfo.getMail());
 

@@ -11,7 +11,10 @@ import com.maximeattoumani.darties_mobile.model.User;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -73,4 +76,8 @@ public static final String ENDPOINT = "http://darties1equipea.ddns.net/Darties_E
                         @Path("mObj")String mObj,
                         @Path("mReel")String mReel,
                         Callback<List<FaitsVentes>> callback);
+
+    @FormUrlEncoded
+    @POST("/apiCall.php/deleteMessage")
+    void deleteMessage(@Field("id") int token);
 }

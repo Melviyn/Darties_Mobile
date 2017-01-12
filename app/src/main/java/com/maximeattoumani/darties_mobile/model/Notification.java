@@ -9,27 +9,25 @@ import java.util.Date;
 public class Notification {
 
     private String message;
-    private int id;
     private String title;
-    private int id_user;
     private String date;
+    private String libelle;
+    private int id;
 
-    public Notification(String title,String message, int id_user, String date) {
+    public Notification(String message, String title, String date, String libelle) {
         this.message = message;
         this.title = title;
-        this.id_user = id_user;
         this.date = date;
+        this.libelle = libelle;
     }
 
     public Notification() {
-        this.message = "";
         this.id = 0;
+        this.message = "";
         this.title = "";
-        this.id_user = 0;
         this.date = "";
+        this.libelle = "";
     }
-
-
 
     public String getMessage() {
         return message;
@@ -37,14 +35,6 @@ public class Notification {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -55,19 +45,27 @@ public class Notification {
         this.title = title;
     }
 
-    public int getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
-    }
-
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

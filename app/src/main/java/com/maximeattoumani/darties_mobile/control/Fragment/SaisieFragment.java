@@ -100,7 +100,7 @@ public class SaisieFragment extends Fragment{
         session.checkLogin();
         api = session.getKeyApi();
         // END SESSION
-        idMag=session.getStringValue("id_zone");
+        idMag=session.getStringValue("LIB_PROFIL");
 
         apiService = ApiClient.getClient();
         apiService.listFaitsVentesAsync(api, new Callback<List<FaitsVentes>>() {

@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         Profil profil = prof.get(0);
                                                         session.addValueString("LIB_PROFIL",profil.getLib_profil());
                                                         session.addValueString("id_zone",profil.getId_zone());
+                                                        session.addValueString("zone",profil.getType_zone());
                                                     }
                                                 }
                                             }

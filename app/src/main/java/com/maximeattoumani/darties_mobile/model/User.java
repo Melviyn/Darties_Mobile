@@ -12,6 +12,7 @@ public class User {
     private String mail;
     private String apikey;
     private String lib_profil;
+    private String message;
 
     public String getLib_profil() {
         return lib_profil;
@@ -69,4 +70,11 @@ public class User {
         this.apikey = apikey;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

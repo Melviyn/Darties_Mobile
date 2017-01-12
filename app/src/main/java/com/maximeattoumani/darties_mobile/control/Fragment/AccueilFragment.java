@@ -22,7 +22,9 @@ import com.maximeattoumani.darties_mobile.control.Adapter.NotificationAdapter;
 import com.maximeattoumani.darties_mobile.control.Adapter.RowAccueilAdapter;
 import com.maximeattoumani.darties_mobile.model.FaitsVentes;
 import com.maximeattoumani.darties_mobile.model.Notification;
+import com.maximeattoumani.darties_mobile.model.NotificationBDD;
 import com.maximeattoumani.darties_mobile.model.ProduitAccueil;
+import com.maximeattoumani.darties_mobile.model.Profil;
 import com.maximeattoumani.darties_mobile.model.RowAccueil;
 import com.maximeattoumani.darties_mobile.model.User;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
@@ -32,6 +34,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
 
 import retrofit.Callback;
@@ -48,28 +51,58 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
 
     private List<Notification> info;
     ListView listN;
-    List<Notification> notif;
-    List<Notification> test = new ArrayList<Notification>();
+    List<Notification> notif = new ArrayList<Notification>();
+    List<Notification> verifMessage = new ArrayList<Notification>();
     View v;
     private int longClickItem;
     private NotificationAdapter adapter;
     private ApiInterface apiService;
-    int jour,mois,annee,jourUp,moisUp,anneeUp;
+    private NotificationBDD notBDD;
+    private User user;
+    private TextView recept;
+
+    public AccueilFragment(){
+
+    }
+
+    public void NotifCourant(User users){
+
+        this.user = users;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        notBDD = new NotificationBDD(getActivity().getApplicationContext());
+
         if(v == null){
             v = inflater.inflate(R.layout.accueil_main,container, false);
         }
         listN = (ListView) v.findViewById(R.id.message);
+        recept = (TextView) v.findViewById(R.id.reception);
 
-        getNotif();
+        recept.setText(Html.fromHtml("Boite de reception : <b>" + notBDD.getNbTache(user.getLib_profil()) + " message(s)</b>"));
 
-        adapter = new NotificationAdapter(getActivity().getApplicationContext(), info);
-        listN.setAdapter(adapter);
+        verifMessage = notBDD.sortByLibelle(user.getLib_profil());
+
+        Date aujourdhui = new Date();SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+        String date = formater.format(aujourdhui);
+
+        if(!user.getMessage().equals("") && !MessageExists(user)){
+            notBDD.insertNotfication(new Notification(user.getMessage(),"Objet : Saisie donnée",date,user.getLib_profil()));
+        }
+
+        if(notBDD.getNbTache(user.getLib_profil()) != 0) {
+            notif.addAll(notBDD.sortByLibelle(user.getLib_profil()));
+        }
+
+        this.setList(notif);
+
+        this.initialise();
+
         registerForContextMenu(listN);
+
          listN.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,117 +119,6 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
         info = list;
     }
 
-
-    public void getNotif(){
-
-        apiService = ApiClient.getClient();
-        apiService.listFaitsVentesAsync("51ff65b83616450eeb197760ebe2ec42", new Callback<List<FaitsVentes>>() {
-            @Override
-            public void success(List<FaitsVentes> faitsVentes, Response response) {
-                if (response.getStatus() == 200) if (faitsVentes != null) {
-
-                    SimpleDateFormat formater1 = new SimpleDateFormat("dd");
-                    SimpleDateFormat formater2 = new SimpleDateFormat("MM");
-                    SimpleDateFormat formater3 = new SimpleDateFormat("yyyy");
-                    Date aujourdhui = new Date();
-                    jour = Integer.parseInt(formater1.format(aujourdhui));
-                    mois=Integer.parseInt(formater2.format(aujourdhui));
-                    annee=Integer.parseInt(formater3.format(aujourdhui));
-
-                    for(int i=0; i<faitsVentes.size();i++) {
-
-                        if(faitsVentes.get(i).getDATE_MAJ() != null){
-
-
-                            String string = faitsVentes.get(i).getDATE_MAJ();
-                            String[] parts = string.substring(0,10).split("-");
-
-                            jourUp=Integer.parseInt(parts[2]);
-                            moisUp=Integer.parseInt(parts[1]);
-                            anneeUp=Integer.parseInt(parts[0]);
-
-                            if(jour >=1 && jour <=10){
-                                if(moisUp == mois && anneeUp==annee){
-
-                                    if(jourUp >= 7 && jourUp <=10) {
-                                        //message rappel
-                                        test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                    }
-
-                                }
-                                else if(anneeUp == annee && moisUp < mois){
-                                    //message!
-                                    test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                }
-                               /* else if(anneeUp < annee){
-                                    //message!
-                                    test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                }*/
-
-                            }
-                            else if(jour > 10 && jour <=20){
-                                if(moisUp == mois && anneeUp==annee){
-
-                                    if(jourUp >= 17 && jourUp <=20) {
-                                        //message rappel
-                                        test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                    }
-                                    else{
-                                        System.out.println("à jour");
-                                    }
-
-                                }
-                                else if(anneeUp == annee && moisUp < mois){
-                                    //message!
-                                    test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                }
-                               /* else if(anneeUp < annee){
-                                    //message!
-                                    test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                }*/
-                            }
-                            else if(jour > 20 && jour<=31) {
-                                if (moisUp == mois && anneeUp == annee) {
-
-                                    if (jourUp >= 28 && jourUp <= 31) {
-                                        //message rappel
-                                        test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                    }
-                                }
-                                else if (anneeUp == annee && moisUp < mois) {
-                                    //message!
-                                    test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                }
-                               /*else if (anneeUp < annee) {
-                                    //message!
-                                    test.add(new Notification("test","message de test",1,"16/02/1996"));
-                                }*/
-                            }
-                        }
-                    }
-
-                    System.out.println("notif :"+test.size());
-                    System.out.println("vente :"+faitsVentes.size());
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
-
-        notif = new ArrayList<Notification>();
-        for(int i = 0; i < 6;i++){
-
-
-            notif.add(new Notification("test","message de test",1,"16/02/1996"));
-        }
-
-        this.setList(notif);
-
-    }
-
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
        // menu.setHeaderTitle("Option");
@@ -204,10 +126,29 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
     }
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Effacer le message") {
+            notBDD.removeTache(notif.get(longClickItem));
             notif.remove(longClickItem);
+            apiService = ApiClient.getClient();
+            //apiService.deleteMessage(user.getId_profil());
             adapter.notifyDataSetChanged();
         }
         return true;
+    }
+
+    public void initialise(){
+        adapter = new NotificationAdapter(getActivity().getApplicationContext(), info);
+        listN.setAdapter(adapter);
+    }
+
+    private boolean MessageExists(User not) {
+        String message = not.getMessage();
+        int TacheCount = verifMessage.size();
+
+        for (int i = 0; i < TacheCount; i++) {
+            if (message.compareToIgnoreCase(verifMessage.get(i).getMessage()) == 0)
+                return true;
+        }
+        return false;
     }
 
 
