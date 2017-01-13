@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Date_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/date_up"
-        android:textColor="@color/colorAccent"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/lib_up"
-        android:layout_alignStart="@+id/lib_up" />
+    <ImageView
+        android:layout_width="70dp"
+        android:id="@+id/mag"
+        android:layout_height="60dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp" />
 
     <TextView
-        android:text="Lib_Profil"
-        android:layout_width="185dp"
+        android:paddingTop="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lib_up"
-        android:layout_marginTop="19dp"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        android:layout_alignParentTop="?android:attr/textAppearanceLarge"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_margin="0dp"
+        android:transformPivotX="0dp"
+        android:translationY="0dp"
+        android:translationX="0dp"
+        android:translationZ="0dp"
+        android:transformPivotY="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:paddingBottom="20dp"
+        android:paddingLeft="25dp" />
+
+</LinearLayout>

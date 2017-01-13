@@ -4,6 +4,7 @@ import com.maximeattoumani.darties_mobile.model.Enseigne;
 import com.maximeattoumani.darties_mobile.model.FaitsVentes;
 import com.maximeattoumani.darties_mobile.model.FamProd;
 import com.maximeattoumani.darties_mobile.model.Geographie;
+import com.maximeattoumani.darties_mobile.model.Gestion;
 import com.maximeattoumani.darties_mobile.model.ProduitAccueil;
 import com.maximeattoumani.darties_mobile.model.Profil;
 import com.maximeattoumani.darties_mobile.model.User;
@@ -79,5 +80,11 @@ public static final String ENDPOINT = "http://darties1equipea.ddns.net/Darties_E
 
     @FormUrlEncoded
     @POST("/apiCall.php/deleteMessage")
-    void deleteMessage(@Field("id") int token);
+    void deleteMessage(@Field("id") int token,Callback<String> callback);
+
+    @GET("/apiCall.php/getNotif/{id}")
+    void getNotification(@Path("id")int token,Callback<String> callback);
+
+    @GET("/apiCall.php/gestion_utilisateur/{id}")
+    void gestion_utilisateur(@Path("id")String id, Callback<List<Gestion>> callback);
 }

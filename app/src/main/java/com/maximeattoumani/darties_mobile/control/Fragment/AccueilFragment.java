@@ -82,7 +82,7 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
         listN = (ListView) v.findViewById(R.id.message);
         recept = (TextView) v.findViewById(R.id.reception);
 
-        recept.setText(Html.fromHtml("Boite de reception : <b>" + notBDD.getNbTache(user.getLib_profil()) + " message(s)</b>"));
+
 
         verifMessage = notBDD.sortByLibelle(user.getLib_profil());
 
@@ -96,6 +96,9 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
         if(notBDD.getNbTache(user.getLib_profil()) != 0) {
             notif.addAll(notBDD.sortByLibelle(user.getLib_profil()));
         }
+        recept.setText(Html.fromHtml("Boite de reception : <b>" + notif.size() + " message(s)</b>"));
+
+
 
         this.setList(notif);
 
@@ -129,7 +132,17 @@ public class AccueilFragment extends android.support.v4.app.Fragment{
             notBDD.removeTache(notif.get(longClickItem));
             notif.remove(longClickItem);
             apiService = ApiClient.getClient();
-            //apiService.deleteMessage(user.getId_profil());
+            apiService.deleteMessage(user.getId_profil(), new Callback<String>() {
+                @Override
+                public void success(String s, Response response) {
+                    recept.setText(Html.fromHtml("Boite de reception : <b>" + notif.size() + " message(s)</b>"));
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
             adapter.notifyDataSetChanged();
         }
         return true;

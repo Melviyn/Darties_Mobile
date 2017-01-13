@@ -29,7 +29,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:hint="Email"
-        android:text="Angelique.ROUX@darties.com" />
+        android:text="James.PIERCE@darties.com" />
 
     <EditText
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:hint="Mot de passe"
-        android:text="7u2Mx4W" />
+        android:text="P58qg3J" />
 
     <Button
         android:text="Connexion"

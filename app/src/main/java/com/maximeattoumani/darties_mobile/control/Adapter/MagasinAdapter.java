@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maximeattoumani.darties_mobile.R;
-import com.maximeattoumani.darties_mobile.model.Magasin;
-import com.maximeattoumani.darties_mobile.model.Notification;
+import com.maximeattoumani.darties_mobile.model.Gestion;
 
 import java.util.List;
 
@@ -18,10 +17,13 @@ import java.util.List;
  * Created by Maxime on 11/01/2017.
  */
 
-public class MagasinAdapter extends ArrayAdapter<Magasin> {
+public class MagasinAdapter extends ArrayAdapter<Gestion> {
 
-    public MagasinAdapter(Context context, List<Magasin> list) {
+    private Integer[] icon;
+
+    public MagasinAdapter(Context context, List<Gestion> list,Integer[] pics) {
         super(context,0,list);
+        this.icon = pics;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -34,24 +36,24 @@ public class MagasinAdapter extends ArrayAdapter<Magasin> {
         if(viewHolder == null){
             viewHolder = new MagasinAdapter.MagasinViewHolder();
             viewHolder.lib_up= (TextView) convertView.findViewById(R.id.lib_up);
-            viewHolder.date_up = (TextView) convertView.findViewById(R.id.date_up);
+            viewHolder.image= (ImageView) convertView.findViewById(R.id.mag);
             convertView.setTag(viewHolder);
         }
 
         //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
-        Magasin row = getItem(position);
+        Gestion row = getItem(position);
 
         //il ne reste plus qu'à remplir notre vue
         //viewHolder.check.isChecked();
-        viewHolder.lib_up.setText(row.getLibelle());
-        viewHolder.date_up.setText(row.getDate_update());
+        viewHolder.lib_up.setText(row.getLib_profil());
+        viewHolder.image.setBackgroundResource(icon[position]);
 
         return convertView;
     }
 
     private class MagasinViewHolder{
         public TextView lib_up;
-        public TextView date_up;
+        public ImageView image;
 
     }
 }

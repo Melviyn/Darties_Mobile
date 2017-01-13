@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.maximeattoumani.darties_mobile.R;
+import com.maximeattoumani.darties_mobile.model.Gestion;
 import com.maximeattoumani.darties_mobile.model.Profil;
 import com.maximeattoumani.darties_mobile.model.SessionManager;
 import com.maximeattoumani.darties_mobile.model.User;
@@ -72,7 +73,19 @@ public class LoginActivity extends AppCompatActivity {
                                                         Profil profil = prof.get(0);
                                                         session.addValueString("LIB_PROFIL",profil.getLib_profil());
                                                         session.addValueString("id_zone",profil.getId_zone());
-                                                        session.addValueString("zone",profil.getType_zone());
+                                                        if(profil.getType_zone().equals("2") || profil.getType_zone().equals("3")) {
+                                                            apiService.getNotification(Integer.parseInt(profil.getId_profil()), new Callback<String>() {
+                                                                @Override
+                                                                public void success(String s, Response response) {
+
+                                                                }
+
+                                                                @Override
+                                                                public void failure(RetrofitError error) {
+
+                                                                }
+                                                            });
+                                                        }
                                                     }
                                                 }
                                             }

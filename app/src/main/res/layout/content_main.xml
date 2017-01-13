@@ -14,9 +14,4 @@
     tools:context="com.maximeattoumani.darties_mobile.control.Activity.LoginActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <include
-        layout="@layout/accueil_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 </RelativeLayout>

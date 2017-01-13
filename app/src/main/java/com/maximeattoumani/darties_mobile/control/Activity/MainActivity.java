@@ -29,6 +29,8 @@ import com.maximeattoumani.darties_mobile.control.Fragment.ModifCmpFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.SaisieFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.TableauSaisiFragment;
 import com.maximeattoumani.darties_mobile.control.Fragment.TableauxFragment;
+import com.maximeattoumani.darties_mobile.model.Gestion;
+import com.maximeattoumani.darties_mobile.model.Profil;
 import com.maximeattoumani.darties_mobile.model.SessionManager;
 import com.maximeattoumani.darties_mobile.model.User;
 import com.maximeattoumani.darties_mobile.rest.ApiClient;
@@ -54,12 +56,14 @@ public class MainActivity extends AppCompatActivity
     CmpFragment comptefrg;
 
     private User userInfo;
+    private Profil profilInfo;
     private TextView name;
     private TextView mail;
     private ListView listN;
     ModifCmpFragment modifCmpFragment;
     AccueilFragment accueil;
-    Menu myMenu;
+    Gestion_Magasin_Fragment fragment;
+    Menu nav_Menu;
 
 
     @Override
@@ -69,9 +73,7 @@ public class MainActivity extends AppCompatActivity
 
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
-        String libelle=session.getStringValue("LIB_PROFIL");
-        System.out.println(libelle);
-        this.infoCompte();
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,26 +86,15 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerview = navigationView.getHeaderView(0);
+        nav_Menu = navigationView.getMenu();
+        this.infoCompte();
+        this.gestion_utilisateur();
 
         image = (ImageView) headerview.findViewById(R.id.imageView) ;
         image.setOnClickListener(this);
 
         name = (TextView) headerview.findViewById(R.id.nomprenom);
         mail = (TextView) headerview.findViewById(R.id.mail);
-
-        Menu nav_Menu = navigationView.getMenu();
-
-
-        /*if(libelle.equals("Directeur Nord_Est") || libelle.equals("Directeur Sud_Ouest")
-                || libelle.equals("Directeur Sud_Est") || libelle.equals("Directeur Region_parisienne")
-                || libelle.equals("Directeur Nord_Ouest")){
-            nav_Menu.findItem(R.id.saisie).setVisible(false);
-            nav_Menu.findItem(R.id.acc).setVisible(false);
-        }
-        else {
-            nav_Menu.findItem(R.id.gestion).setVisible(false);
-        }*/
-
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -156,9 +147,7 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(id == R.id.delete){
-            Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.action_modif){
+        if (id == R.id.action_modif){
             Toast.makeText(this,"modif",Toast.LENGTH_LONG).show();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main, modifCmpFragment);
@@ -186,13 +175,11 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main,fragment);
             fragmentTransaction.commit();
-            Toast.makeText(this, "Saisie", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.tabAcc) {
             TableauxFragment fragment = new TableauxFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main,fragment);
             fragmentTransaction.commit();
-            Toast.makeText(this, "Tableau", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.deconnect) {
 
@@ -234,7 +221,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         else if(id == R.id.gestion){
-            Gestion_Magasin_Fragment fragment = new Gestion_Magasin_Fragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main,fragment);
             fragmentTransaction.commit();
@@ -249,7 +235,6 @@ public class MainActivity extends AppCompatActivity
     private void infoCompte(){
         api = session.getKeyApi();
         apiService = ApiClient.getClient();
-
         apiService.listUserAsync(api, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
@@ -265,6 +250,18 @@ public class MainActivity extends AppCompatActivity
                             accueil.NotifCourant(userInfo);
                             name.setText(userInfo.getPrenom()+" "+userInfo.getNom());
                             mail.setText(userInfo.getMail());
+                            String libelle = userInfo.getLib_profil();
+
+                            if(libelle.equals("Directeur Nord_Est") || libelle.equals("Directeur Sud_Ouest")
+                || libelle.equals("Directeur Sud_Est") || libelle.equals("Directeur Region_parisienne")
+                || libelle.equals("Directeur Nord_Ouest")){
+                    nav_Menu.findItem(R.id.saisie).setVisible(false);
+                    nav_Menu.findItem(R.id.acc).setVisible(false);
+                            }
+                            else {
+                                nav_Menu.findItem(R.id.gestion).setVisible(false);
+                                nav_Menu.performIdentifierAction(R.id.acc, 0);
+                            }
 
                         }
                     }
@@ -274,6 +271,41 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void failure(RetrofitError error) {
                 Log.d("Error", error.getMessage());
+            }
+        });
+
+    }
+
+    private void gestion_utilisateur(){
+        api = session.getKeyApi();
+        apiService = ApiClient.getClient();
+        apiService.listProfilAsync(api, new Callback<List<Profil>>() {
+            @Override
+            public void success(List<Profil> profils, Response response) {
+                profilInfo = profils.get(0);
+                if(profilInfo.getType_zone().equals("1")){
+                    String libelle = profilInfo.getLib_profil();
+                    String[] parts = libelle.split(" ");
+                    apiService.gestion_utilisateur(parts[1], new Callback<List<Gestion>>() {
+                        @Override
+                        public void success(List<Gestion> gestions, Response response) {
+                            fragment = new Gestion_Magasin_Fragment();
+                            fragment.getGestion(gestions);
+                            nav_Menu.performIdentifierAction(R.id.gestion, 0);
+
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
             }
         });
 
